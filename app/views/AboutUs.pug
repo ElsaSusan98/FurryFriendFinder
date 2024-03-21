@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title About Us
+    link(rel="stylesheet", href="aboutus.css") 
+
+  body
+    header
+      h1 About Us
+      nav
+        ul
+          li
+            a(href="#") Home
+          li
+            a(href="#") Services
+          li
+            a(href="#") Contact
+
+    main
+      section
+        h2 Description
+        p FurryFriendFinder is a web application designed to help and guide pet owners to find the perfect trainer for their beloved pets. Whether you are looking for obedience training, guard training, behavioral modification, or any specialized training for the pets, our application aims to connect pet owners with well-qualified trainers in their area.
+
+      section
+        h2 Contact Information
+        p Email: furryfriendfinder@example.com
+        p Phone: +447341235678
+        p Location: Oxford Circus
+
+      section
+        h2 Query Box
+        form(action="#", method="POST")
+          label(for="query") Query:
+          input#query(type="text", name="query", placeholder="Enter your query here", required)
+          button(type="submit") Submit
