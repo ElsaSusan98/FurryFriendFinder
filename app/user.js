@@ -72,9 +72,22 @@ User.prototype = {
                 callback(null);
             }
         });
-    
-    
     },
+    getTrainers: function(callback) {
+        // Prepare the SQL query to select all data from the trainer_table
+        let sql = 'SELECT * FROM trainer_table';
+
+        // Execute the query
+        pool.query(sql, (err, results) => {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+            callback(null, results);
+        });
+    }
+    
+
     
 
 }

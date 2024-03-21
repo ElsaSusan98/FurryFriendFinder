@@ -53,14 +53,11 @@ nav ul li a:hover
     border: 1px solid #ccc;
     background-color: #fff;
 }
-.login-panel
-{
-    float: left;
-}
-.register-panel
+
+/* .register-panel
 {
     float: right;
-}
+} */
 .image, .join-us-img
 {
     display: block;
@@ -169,4 +166,8 @@ p
 .greeting span
 {
     color: rgb(112, 172, 16);
+}
+.logo img {
+    height: 100px;
+    width: auto;
 }
