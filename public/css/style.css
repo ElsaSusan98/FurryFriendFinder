@@ -1063,3 +1063,298 @@ h3 {
     margin-top: 50px;
 }
 
+/*about us style */
+.aboutus {
+    height: 260px;
+}
+.about-section {
+    padding: 50px;
+    text-align: center;
+    background-image: url("/img/about.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    background-position: center center;
+    height: 250px;
+}
+.about-section h2 {
+    font-size: 4em;
+    line-height: 1em;
+    color: #fff;
+    font-weight: 900;
+    padding: 50px;
+}
+.blog-section {
+    padding: 60px 0;
+}
+
+.about-our-pets {
+    margin: auto;
+    text-align: center;
+    padding: 40px;
+}
+
+.about-us-area .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.about-us-area .column {
+    flex: 1;
+    padding: 0 15px;
+}
+
+.about-us-content {
+    text-align: left;
+    order: 2;
+}
+
+.about-us-content p {
+    font-size: 16px;
+    text-align: left;
+    margin: 0 0 18px;
+
+}
+
+.about-us-list {
+    margin: 20px 0 34px;
+}
+
+.about-us-list>ul {
+    position: relative;
+}
+
+.about-us-list ul li {
+    display: block;
+    font-size: 16px;
+    list-style: outside none none;
+    margin-bottom: 7px;
+    padding-left: 24px;
+    position: relative;
+    color: #777;
+    font-weight: 400;
+}
+
+.about-us-list ul li:before {
+    color: #454545;
+    content: "\e724";
+    display: inline-block;
+    font-family: themify;
+    font-size: 17px;
+    left: 0;
+    position: absolute;
+    top: -1px;
+}
+
+.about-us-btn .btn-style {
+    border-radius: 50px;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    padding: 18px 30px 17px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all .3s ease 0s;
+    background: #4c3732;
+    text-decoration: none;
+}
+
+.about-us-btn {
+    margin-left: 10px;
+}
+
+.about-us-img {
+    order: 1;
+}
+@media (max-width: 767px) {
+    .about-our-pets {
+      padding: 40px; 
+    }
+    .about-us-img {
+        order: 2;
+        text-align: center; 
+        margin-top: 20px; 
+      }
+    
+      .about-us-img img {
+        width: 100%; 
+        margin-top: 50px;
+      }
+    .about-us-area .column {
+      flex: 1 100%; 
+      padding: 0;
+    }
+  
+    .about-us-content {
+      text-align: center; 
+    }
+  
+    .about-us-content p {
+      text-align: center; 
+    }
+  
+    .about-us-btn {
+      margin-top: 20px; 
+    }
+    
+    .about-us-img {
+      order: 1; 
+    }
+  }
+  
+@media (max-width: 767px) {
+
+    .about-us-content,
+    .about-us-img {
+        order: initial;
+    }
+}
+
+#counterArea {
+    padding: 50px 0;
+    background: #f6f6f6 no-repeat scroll center center / cover;
+    padding-top: 15px;
+    padding-bottom: 70px;
+}
+
+.project-count-area .count-item {
+    flex: 1;
+    padding: 0 15px;
+}
+
+.project-count-area .single-count {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.project-count-area .count {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #333;
+    /* Adjust color as needed */
+}
+
+.project-count-area span {
+    display: block;
+    font-size: 18px;
+    color: #666;
+    /* Adjust color as needed */
+}
+
+.project-count-area .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.project-count-area .column {
+    width: 100%;
+}
+
+.blog-section {
+    padding: 60px 0;
+
+}
+
+.blog-detail-page {
+    max-width: 1200px;
+    /* Set the maximum width of the blog content */
+    margin: auto;
+}
+
+.blog-img {
+    margin-bottom: 30px;
+}
+
+.blog-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    /* Add border-radius for rounded corners */
+}
+
+.blog-details-content {
+    margin-bottom: 20px;
+}
+
+.blog-details-content h2 {
+    font-size: 24px;
+    color: #333;
+    /* Set the color of the heading */
+}
+
+.blog-meta {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    font-size: 16px;
+    color: #777;
+    /* Set the color of the meta information */
+}
+
+.blog-meta li {
+    margin-right: 20px;
+    color: #575757;
+    display: inline-block;
+    list-style: outside none none;
+    margin: 0 11px 0 0;
+    position: relative;
+}
+
+.blog-meta a {
+    color: #007bff;
+    /* Set the color of the meta link */
+    text-decoration: none;
+}
+
+.blog-meta a:hover {
+    text-decoration: underline;
+}
+
+.blog-details-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    /* Set the color of the text */
+}
+
+blockquote.importent-title {
+    margin: 20px 0;
+    padding: 15px;
+    border-left: 2px solid #007bff;
+    /* Set the border color for the blockquote */
+    background-color: #f4f4f4;
+    /* Set the background color for the blockquote */
+}
+
+blockquote h4 {
+    font-size: 18px;
+    color: #333;
+    /* Set the color of the blockquote text */
+}
+
+.dec-img-wrapper {
+    margin-top: 30px;
+}
+
+.dec-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    /* Add border-radius for rounded corners */
+}
+
+.blog-section .container {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    max-width: 1320px;
+}
+.blog-section .row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+}

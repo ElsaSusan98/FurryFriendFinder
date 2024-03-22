@@ -22,6 +22,12 @@ app.get("/", function(req, res) {
 app.get("/login", function(req, res) {
     res.render("index");
 });
+
+//create a route for blog page
+
+app.get("/blog",function(req,res){
+    res.render("blog");
+})
 // app.get("/home", function(req, res) {
 
 //     res.render("home");
