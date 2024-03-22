@@ -1,20 +1,213 @@
 extends layout
-
-mixin message(opp, name)
-    if(opp)
-        h1.greeting Logged in as 
-            span=name 
-    else 
-        h1.greeting Welcome 
-            span=name 
-            |  to our website
-
-
-append links 
-    li(style="float: right;")
-        a(href="/loggout") Loggout 
-
 block content
-    .dashboard 
-        .user 
-            +message(opp, name)
+    .body-content 
+         
+
+        section.home_banner 
+            h1 Furry Friend Finder 
+            p  Keep Your Pets Happy
+        section.testimonials
+            h1 Our Trainers
+            .row
+                each row in trainers
+                    .testimonials-col
+                        img(src=row.trainer_image)
+                        div
+                            p
+                                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus,
+                                | in
+                                | tincidunt sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum
+                                | sapien,
+                                | sed molestie turpis
+                                h3 #{row.trainer_name}
+                                p.trainer Trainer Speciality:
+                                    p.trainer_spec #{row.trainer_speciality}
+                                p.experience Trainer Experience: 
+                                    p.trainer_spec #{row.trainer_experience}
+                       
+        section.course
+            h1 Services we offer
+            p
+                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus, in tincidunt
+                | sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum sapien, sed molestie
+                | turpis enim sed nibh. Morbi diam magna, varius condimentum commodo at, lobortis a dolor.
+            .row
+                .course-col(style='background-color: #fcedda;')
+                    h3 FREE SHIPPING
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus, in
+                        | tincidunt sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum sapien,
+                        | sed molestie turpis enim sed nibh. Morbi diam magna, varius condimentum commodo at, lobortis a
+                        | dolor.
+                .course-col(style='background-color:#f2fbcb;')
+                    h3 ONLINE SUPPORT
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus, in
+                        | tincidunt sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum sapien,
+                        | sed molestie turpis enim sed nibh. Morbi diam magna, varius condimentum commodo at, lobortis a
+                        | dolor.
+                .course-col(style='background-color:#f7d8f9;')
+                    h3 MONEY RETURN
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus, in
+                        | tincidunt sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum sapien,
+                        | sed molestie turpis enim sed nibh. Morbi diam magna, varius condimentum commodo at, lobortis a
+                        | dolor.
+        section.campus
+            h1 Recent Products
+            p
+                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus, in
+                | tincidunt sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum sapien,
+                | sed molestie turpis
+            .row
+                .campus-col
+                    img(src='/img/product-1.avif')
+                    .layer
+                        h3 Dogs Food
+                .campus-col
+                    img(src='/img/product-2.avif')
+                    .layer
+                        h3 Cats Food
+                .campus-col
+                    img(src='/img/product-3.avif')
+                    .layer
+                        h3 Fish Foods
+        section.facilities
+            h1 Latest Blogs
+            p
+                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus, in
+                | tincidunt sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum sapien,
+                | sed molestie turpis
+            .row
+                .facilities-col
+                    img(src='/img/blog1.avif')
+                    h3 Temporibus autem quibusdam
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus, in
+                        | tincidunt sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum sapien,
+                        | sed molestie turpis
+                    p
+                        a(href='blog.html') Read More
+                .facilities-col
+                    img(src='/img/blog2.avif')
+                    h3 Temporibus autem quibusdam
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus, in
+                        | tincidunt sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum sapien,
+                        | sed molestie turpis
+                    p
+                        a(href='blog.html') Read More
+                .facilities-col
+                    img(src='/img/blog3.avif')
+                    h3 Temporibus autem quibusdam
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus, in
+                        | tincidunt sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum sapien,
+                        | sed molestie turpis
+                    p
+                        a(href='blog.html') Read More
+        
+        
+        footer#section-footer.footer-area
+            #footer-top-footer.footer-top
+                .container
+                    .row
+                        .column
+                            .footer-widget
+                                .footer-info-wrapper
+                                    .footer-logo
+                                        a(href='index.html')
+                                            img(src='/img/logo.png')
+                                    p
+                                        | Lorem ipsum dolor sit amet, co adipisi elit, sed eiusmod tempor incididunt ut
+                                        | laboreet dolore
+                                    .social-icon
+                                        ul
+                                            li
+                                                a(href='#')
+                                                    i.fa-brands.fa-twitter
+                                            li
+                                                a(href='#')
+                                                    i.fa-brands.fa-instagram
+                                            li
+                                                a(href='#')
+                                                    i.fa-brands.fa-facebook
+                                            li
+                                                a(href='#')
+                                                    i.fa-brands.fa-skype
+                                            li
+                                                a(href='#')
+                                                    i.fa-brands.fa-dribbble
+                        .column
+                            .footer-widget
+                                h4.footer-title QUICK LINKS
+                                .footer-content
+                                    ul
+                                        li
+                                            a(href='index.html') HOME
+                                        li
+                                            a(href='services.html') SERVICES
+                                        li
+                                            a(href='products.html') PRODUCTS
+                                        li
+                                            a(href='blog.html') BLOGS
+                                        li
+                                            a(href='contactus.html') CONTACTUS
+                        .column
+                            .footer-widget
+                                h4.footer-title HELP
+                                .footer-content
+                                    ul
+                                        li
+                                            a(href='#') FAQ
+                                        li
+                                            a(href='#') PRICING PLANS
+                                        li
+                                            a(href='#') ORDER TRACKING
+                                        li
+                                            a(href='#') RETURNS 
+                        .column
+                            .footer-widget
+                                .newsletter-wrapper
+                                    p Subscribe to our newsletter and get 10% off your first purchase..
+                                    .newsletter-style
+                                        .subscribe-form
+                                            form#Contact_footer.contact-form(method='post' action='' accept-charset='UTF-8')
+                                                input(type='hidden' name='form_type' value='customer')
+                                                input(type='hidden' name='utf8' value='✓')
+                                                .validate
+                                                    #mc_embed_signup_scroll.mc-form
+                                                        .mc-form.subscribe-form
+                                                            input.input_text(type='hidden' name='contact[tags]' value='newsletter')
+                                                            input#Email.input_text(type='email' name='contact[email]' value='' placeholder='email@example.com' aria-label='email@example.com' autocorrect='off' autocapitalize='off')
+                                                            .clear
+                                                                input#Subscribe.button(type='submit' name='commit' value='SEND')
+                                .payment-img
+                                    a(href='#')
+                                        img(src='/img/payment_large.webp' alt='')
+            #footer-bottom-footer.footer-bottom
+                .container
+                    .row
+                        .column
+                            .copyright
+                                p
+                                    | Copyright &copy; 2024 
+                                    a(href='#') Pets template
+                                    |  | Built with 
+                                    a(href='#') Elsa
+                                    |  by 
+                                    a(href='#') SusanThemes
+                                    | .
+
+
+
+//- append links 
+//-     li(style="float: right;")
+//-         a(href="/loggout") Loggout 
+
+//- block content
+//-     .dashboard 
+//-         .user 
+//-             +message(opp, name)
+//-             p Name #{trainer.name}
+

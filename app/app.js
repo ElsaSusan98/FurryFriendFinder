@@ -11,40 +11,45 @@ var app = express();
 app.use(express.static("public"));
 
 
-// Get the functions in the db.js file to use
-//app.use(bodyParser.urlencoded({ extended: true }));
-
-
-// Routers
-
-// Template engine. PUG
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'pug');
-
 app.set('view engine','pug');
 app.set('views','./app/views');
 
 // Create a route for root - /
 app.get("/", function(req, res) {
+    res.render("home");
+});
+// Create a route for root - /
+app.get("/login", function(req, res) {
     res.render("index");
 });
-app.get("/home", function(req, res) {
 
-    res.render("home");
+//create a route for blog page
+
+app.get("/blog",function(req,res){
+    res.render("blog");
+})
+// app.get("/home", function(req, res) {
+
+//     res.render("home");
+// });
+
+app.get("/register", function(req, res) {
+
+    res.render("register");
 });
 
 // Serve static files. CSS, Images, JS files ... etc
 
-// Get home page
-app.get('/home', (req, res, next) => {
-    let user = req.session.user;
+// // Get home page
+// app.get('/home', (req, res, next) => {
+//     let user = req.session.user;
 
-    if(user) {
-        res.render('home', {opp:req.session.opp, name:user.fullname});
-        return;
-    }
-    res.redirect('/');
-});
+//     if(user) {
+//         res.render('home', {opp:req.session.opp, name:user.fullname});
+//         return;
+//     }
+//     res.redirect('/');
+// });
 
 
 
@@ -72,15 +77,39 @@ app.post('/login', (req, res, next) => {
 
 
 
-// Create a route for testing the db
-app.get("/db_test", function(req, res) {
+//Create a route for testing the db
+app.get("/home", function(req, res) {
     // Assumes a table called test_table exists in your database
-    sql = 'select * from trainer_table';
+    var trainerlist =[];
+  
+    const sql = 'select * from trainer_table';
     db.query(sql).then(results => {
-        console.log(results);
-        res.send(results)
+     //   console.log(results);
+        //res.send(results);
+     res.render('home', { trainers:results });
+    
     });
+    /*db.query(sql,error,result => {
+        console.log(result);
+    });*/
 });
+// console.log("hi");
+// app.get("/home", function(req, res) {
+//     // Retrieve trainers data from the database
+//     const sql = 'SELECT * FROM trainer_table';
+//     db.query(sql).then(trainers => {
+//             // Log the trainers data
+//             console.log('Trainers data:', trainers);
+            
+//             // Render the 'home' template and pass the 'trainers' data
+//             res.render('home', { trainers:trainers });
+//         })
+//         .catch(error => {
+//             // Log the error
+//             console.error('Error retrieving trainers data:', error);
+//             res.status(500).send('Error retrieving data from database');
+//         });
+// });
 
 // Create a route for /goodbye
 // Responds to a 'GET' request
