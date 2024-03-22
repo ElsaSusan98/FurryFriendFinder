@@ -1358,3 +1358,9 @@ blockquote h4 {
     margin-right: calc(-.5 * var(--bs-gutter-x));
     margin-left: calc(-.5 * var(--bs-gutter-x));
 }
+.shop-sidebar {
+    flex: 1;
+    background: #f5f2f2 !important;
+    padding: 20px !important;
+    margin-right: 30px;
+}

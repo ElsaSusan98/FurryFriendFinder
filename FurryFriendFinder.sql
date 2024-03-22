@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 21, 2024 at 02:38 PM
+-- Generation Time: Mar 22, 2024 at 02:22 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.8
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `FurryFriendFinder`
+-- Database: `furryfriendfinder`
 --
 
 -- --------------------------------------------------------
@@ -59,18 +59,17 @@ CREATE TABLE `enquiry_table` (
   `phone_number` varchar(100) NOT NULL,
   `subject` text NOT NULL,
   `message` text NOT NULL,
-  `enquiry_status` varchar(100) NOT NULL,
-  `user_id` int NOT NULL
+  `enquiry_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `enquiry_table`
 --
 
-INSERT INTO `enquiry_table` (`enquiry_id`, `name`, `email`, `phone_number`, `subject`, `message`, `enquiry_status`, `user_id`) VALUES
-(700001, 'mani', 'mani@gmail.com', '+00 1234567890', 'regarding offers', 'Is there any offer is going on now !', 'Pending', 1),
-(700002, 'Tulasi', 'tulasi@gmail.com', '07990809462', 'Regarding your services', 'What services are you guys offering.', 'Pending', 1),
-(700003, 'ram', 'ram@gmail.com', '7993403447', 'trainning', 'what type of pets are you guys accept.', 'Pending', 1);
+INSERT INTO `enquiry_table` (`enquiry_id`, `name`, `email`, `phone_number`, `subject`, `message`, `enquiry_status`) VALUES
+(700001, 'mani', 'mani@gmail.com', '+00 1234567890', 'regarding offers', 'Is there any offer is going on now !', 'Pending'),
+(700002, 'Tulasi', 'tulasi@gmail.com', '07990809462', 'Regarding your services', 'What services are you guys offering.', 'Pending'),
+(700003, 'ram', 'ram@gmail.com', '7993403447', 'trainning', 'what type of pets are you guys accept.', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -105,8 +104,9 @@ INSERT INTO `review` (`review_id`, `user_id`, `trainer_id`, `rating`, `review_co
 CREATE TABLE `trainer_table` (
   `trainer_id` int NOT NULL,
   `trainer_name` varchar(100) NOT NULL,
-  `trainer_speciality` varchar(100) NOT NULL,
-  `trainer_image` blob NOT NULL,
+  `trainer_email` varchar(100) NOT NULL,
+  `trainer_speciality` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `trainer_image` varchar(255) NOT NULL,
   `trainer_experience` int NOT NULL,
   `trainer_certificate` varchar(100) NOT NULL,
   `trainer_description` text,
@@ -117,8 +117,10 @@ CREATE TABLE `trainer_table` (
 -- Dumping data for table `trainer_table`
 --
 
-INSERT INTO `trainer_table` (`trainer_id`, `trainer_name`, `trainer_speciality`, `trainer_image`, `trainer_experience`, `trainer_certificate`, `trainer_description`, `user_id`) VALUES
-(1001, 'jack', 'Protection Training', 0x4c4f41445f46494c4528272f55736572732f6d616e6974756c61736972616d6b616d696e656e692f446f776e6c6f6164732f696d616765732e6a7065672729, 3, 'null', 'null', 2);
+INSERT INTO `trainer_table` (`trainer_id`, `trainer_name`, `trainer_email`, `trainer_speciality`, `trainer_image`, `trainer_experience`, `trainer_certificate`, `trainer_description`, `user_id`) VALUES
+(1001, 'Jack Daniel', 'jack@gmail.com', 'Protection Training', 'img\\trainer.jpg', 3, 'null', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.', 2),
+(1009, 'Paul pious', 'paul@gmail.com\r\n', 'Dog trainer', 'img/testimonial-2.jpg', 5, '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.', NULL),
+(1010, 'Sara Mac', 'sara@gmail.com\r\n', 'Cat trainer', 'img/testimonial-1.jpg', 2, '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.', NULL);
 
 -- --------------------------------------------------------
 
@@ -129,8 +131,8 @@ INSERT INTO `trainer_table` (`trainer_id`, `trainer_name`, `trainer_speciality`,
 CREATE TABLE `user_table` (
   `user_id` int NOT NULL,
   `user_name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `pass_word` varchar(100) NOT NULL,
+  `user_email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `user_password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `registration_date` date NOT NULL,
   `user_type` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -139,7 +141,7 @@ CREATE TABLE `user_table` (
 -- Dumping data for table `user_table`
 --
 
-INSERT INTO `user_table` (`user_id`, `user_name`, `email`, `pass_word`, `registration_date`, `user_type`) VALUES
+INSERT INTO `user_table` (`user_id`, `user_name`, `user_email`, `user_password`, `registration_date`, `user_type`) VALUES
 (1, 'David', 'david@gmail.com', 'David@123', '2024-03-18', 'pet owner'),
 (2, 'elsa', 'elsa@gmail.com', 'Elsa@123', '2024-03-17', 'pet owner'),
 (3, 'ambly', 'ambly@gmail.com', 'Ambly@123', '2024-03-18', 'pet owner'),
@@ -161,8 +163,7 @@ ALTER TABLE `appointment_table`
 -- Indexes for table `enquiry_table`
 --
 ALTER TABLE `enquiry_table`
-  ADD PRIMARY KEY (`enquiry_id`),
-  ADD KEY `fk_constraint_name` (`user_id`);
+  ADD PRIMARY KEY (`enquiry_id`);
 
 --
 -- Indexes for table `review`
@@ -184,7 +185,7 @@ ALTER TABLE `trainer_table`
 --
 ALTER TABLE `user_table`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`user_email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -212,7 +213,7 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `trainer_table`
 --
 ALTER TABLE `trainer_table`
-  MODIFY `trainer_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
+  MODIFY `trainer_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1011;
 
 --
 -- AUTO_INCREMENT for table `user_table`
@@ -230,12 +231,6 @@ ALTER TABLE `user_table`
 ALTER TABLE `appointment_table`
   ADD CONSTRAINT `appointment_table_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`),
   ADD CONSTRAINT `appointment_table_ibfk_2` FOREIGN KEY (`trainer_id`) REFERENCES `trainer_table` (`trainer_id`);
-
---
--- Constraints for table `enquiry_table`
---
-ALTER TABLE `enquiry_table`
-  ADD CONSTRAINT `fk_constraint_name` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`);
 
 --
 -- Constraints for table `review`
