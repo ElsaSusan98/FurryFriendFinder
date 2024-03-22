@@ -16,12 +16,16 @@ app.set('views','./app/views');
 
 // Create a route for root - /
 app.get("/", function(req, res) {
-    res.render("index");
-});
-app.get("/home", function(req, res) {
-
     res.render("home");
 });
+// Create a route for root - /
+app.get("/login", function(req, res) {
+    res.render("index");
+});
+// app.get("/home", function(req, res) {
+
+//     res.render("home");
+// });
 
 app.get("/register", function(req, res) {
 
@@ -30,16 +34,16 @@ app.get("/register", function(req, res) {
 
 // Serve static files. CSS, Images, JS files ... etc
 
-// Get home page
-app.get('/home', (req, res, next) => {
-    let user = req.session.user;
+// // Get home page
+// app.get('/home', (req, res, next) => {
+//     let user = req.session.user;
 
-    if(user) {
-        res.render('home', {opp:req.session.opp, name:user.fullname});
-        return;
-    }
-    res.redirect('/');
-});
+//     if(user) {
+//         res.render('home', {opp:req.session.opp, name:user.fullname});
+//         return;
+//     }
+//     res.redirect('/');
+// });
 
 
 
@@ -70,12 +74,18 @@ app.post('/login', (req, res, next) => {
 //Create a route for testing the db
 app.get("/home", function(req, res) {
     // Assumes a table called test_table exists in your database
-    sql = 'select * from trainer_table';
+    var trainerlist =[];
+  
+    const sql = 'select * from trainer_table';
     db.query(sql).then(results => {
-        console.log(results);
-        res.send(results)
-        res.render('home', { trainers:trainers });
+     //   console.log(results);
+        //res.send(results);
+     res.render('home', { trainers:results });
+    
     });
+    /*db.query(sql,error,result => {
+        console.log(result);
+    });*/
 });
 // console.log("hi");
 // app.get("/home", function(req, res) {
