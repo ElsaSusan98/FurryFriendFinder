@@ -1,4 +1,17 @@
-
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: arial, tahoma;
+    list-style: none;
+    /*    outline: 1px solid brown;*/
+}
 * {
     margin: 0;
     padding: 0;
@@ -1049,7 +1062,10 @@ h3 {
     .shop-widget {
         margin-bottom: 20px; 
     }
-
+    .shop-list-style {
+        margin-top: 20px;
+        text-align: left;
+    }
     .shop-list-style ul li {
         margin-bottom: 10px; 
     }
@@ -1363,4 +1379,39 @@ blockquote h4 {
     background: #f5f2f2 !important;
     padding: 20px !important;
     margin-right: 30px;
+}
+.shop-sidebar-title {
+    color: #242424;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+.shop-list-style ul.blog_links li a {
+    display: inline-block;
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+.blog-details-content h2 {
+    font-size: 24px;
+    color: #333;
+}
+.blog-details-content>h2 {
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+.dec-img-wrapper .column {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+div {
+    display: block;
+    unicode-bidi: isolate;
+}
+.blog-detail-page {
+    flex: 3;
+    display: flex;
+    flex-wrap: wrap;
 }
