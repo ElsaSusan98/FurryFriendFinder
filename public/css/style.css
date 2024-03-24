@@ -1531,7 +1531,7 @@ div {
 }
 
 .about .about-content .about1 .img img{
-    width: 100%;
+    width: 50%;
 }
 
 .about .about-content .about1 .content{
@@ -1609,3 +1609,17 @@ div {
         cursor: pointer;
         width: 100%;
     }
+    .home {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        padding-top: 10rem;
+        align-items: center;
+        /* height: 50vh; */
+        background: url(/img/hero.jpg) no-repeat;
+    }
+    @media (max-width: 991px)
+.home .home-content {
+    width: 100%;
+    padding-left: 8em;
+}
+
