@@ -1532,14 +1532,16 @@ div {
 
 .about .about-content .about1 .img img{
     width: 50%;
+    margin-left: 10%;
 }
 
 .about .about-content .about1 .content{
     flex: 1 1 45rem;
 }
 
-.about .about-content .about1 .content p{
+.about .about-content .about1 .content p {
     font-size: 1.5rem;
+    margin-left: 10%;
 }
 
 .about h1{
@@ -1582,6 +1584,7 @@ div {
         background: none;
         overflow: hidden;
         z-index: 0;
+        margin-left: 10%;
     }
     .our-team {
         width: 80%;
