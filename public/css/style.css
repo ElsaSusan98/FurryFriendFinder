@@ -80,6 +80,7 @@ nav ul li a:hover
     padding: 20px 20px 50px 20px;
     border: 1px solid #ccc;
     background-color: #fff;
+    text-align: center;
 }
 
 /* .register-panel
@@ -90,6 +91,8 @@ nav ul li a:hover
 {
     display: block;
     margin: 0 auto;
+    display: inline-block;
+    max-width: 100%;
 }
 .image
 {
