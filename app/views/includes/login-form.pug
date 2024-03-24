@@ -1,16 +1,8 @@
-form(method="post" action="/login")
-    table 
-        tr
-            td Username 
-            td 
-                input(type="text" name="username")
-        tr 
-            td Password 
-            td 
-                input(type="password" name="password")
-        tr 
-            td
-            td
-               a(href="/home", class="login") Login
-p If you don't have an account
-    a(href="/register",class="register") Register
+.container_login
+      h1 Login
+      form(action='submit_login.php', method='POST')
+        label(for='email') Email:
+        input#login_email(type='email', name='email', required='')
+        label(for='password') Password:
+        input#login_password(type='password', name='password', required='')
+        input#login_submit(type='submit', value='Login')
