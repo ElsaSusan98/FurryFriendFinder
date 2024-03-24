@@ -15,7 +15,7 @@ app.set("views", "./app/views");
 
 // Create a route for root - /
 app.get("/", function (req, res) {
-  res.render("home");
+  res.render("index");
 });
 // Create a route for root - /
 app.get("/login", function (req, res) {
