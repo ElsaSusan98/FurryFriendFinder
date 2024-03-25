@@ -4,9 +4,12 @@ const bodyParser = require('body-parser');
 const User = require('./user');
 const db = require('./services/db');
 
+
+
 // Create express app
 var app = express();
-
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 // Add static files location
 app.use(express.static("public"));
 
@@ -16,12 +19,54 @@ app.set('views','./app/views');
 
 // Create a route for root - /
 app.get("/", function(req, res) {
-    res.render("home");
+    res.render("index");
 });
 // Create a route for root - /
 app.get("/login", function(req, res) {
     res.render("index");
 });
+// Function to fetch trainers data from the database
+async function fetchTrainersData() {
+    try {
+        const sql = 'SELECT * FROM trainer_table';
+        const trainers = await db.query(sql);
+        return trainers;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+// Route for rendering homepage (/home)
+app.get("/home", async function(req, res) {
+    try {
+        const trainers = await fetchTrainersData();
+        res.render('home', { trainers });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Post login data
+app.post('/login', async function(req, res) {
+    const { username, password } = req.body;
+    try {
+        const sql = "SELECT * FROM user_table WHERE user_name = ? AND user_password = ?";
+        const [user] = await db.query(sql, [username, password]);
+        if (user) {
+            // Fetch trainers data and render home template
+            const trainers = await fetchTrainersData();
+            res.render('home', { trainers });
+        } else {
+            res.status(401).send('Invalid username or password');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 //create a route for blog page
 
@@ -38,6 +83,7 @@ app.get("/register", function(req, res) {
     res.render("register");
 });
 
+
 // Serve static files. CSS, Images, JS files ... etc
 
 // // Get home page
@@ -53,24 +99,6 @@ app.get("/register", function(req, res) {
 
 
 
-// Post login data
-app.post('/login', (req, res, next) => {
-    // Creating an instance of the User object
-    const user = new User();
-
-    // Call the login function on the user object
-    user.login(req.body.username, req.body.password, function(result) {
-        if (result) {
-            // Handling successful login
-            req.session.user = result;
-            req.session.opp = 1;
-            res.redirect('/home');
-        } else {
-            // Handling failed login
-            res.send('Username/Password incorrect!');
-        }
-    });
-});
 
 
 
@@ -78,21 +106,7 @@ app.post('/login', (req, res, next) => {
 
 
 //Create a route for testing the db
-app.get("/home", function(req, res) {
-    // Assumes a table called test_table exists in your database
-    var trainerlist =[];
-  
-    const sql = 'select * from trainer_table';
-    db.query(sql).then(results => {
-     //   console.log(results);
-        //res.send(results);
-     res.render('home', { trainers:results });
-    
-    });
-    /*db.query(sql,error,result => {
-        console.log(result);
-    });*/
-});
+
 // console.log("hi");
 // app.get("/home", function(req, res) {
 //     // Retrieve trainers data from the database
