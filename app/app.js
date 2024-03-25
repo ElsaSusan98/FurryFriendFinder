@@ -1,8 +1,8 @@
 // Import express.js
 const express = require("express");
-const bodyParser = require('body-parser');
-const User = require('./user');
-const db = require('./services/db');
+const bodyParser = require("body-parser");
+const User = require("./user");
+const db = require("./services/db");
 
 
 
@@ -13,17 +13,16 @@ app.use(bodyParser.json());
 // Add static files location
 app.use(express.static("public"));
 
-
-app.set('view engine','pug');
-app.set('views','./app/views');
+app.set("view engine", "pug");
+app.set("views", "./app/views");
 
 // Create a route for root - /
 app.get("/", function(req, res) {
     res.render("index");
 });
 // Create a route for root - /
-app.get("/login", function(req, res) {
-    res.render("index");
+app.get("/login", function (req, res) {
+  res.render("index");
 });
 // Function to fetch trainers data from the database
 async function fetchTrainersData() {
@@ -70,17 +69,21 @@ app.post('/login', async function(req, res) {
 
 //create a route for blog page
 
-app.get("/blog",function(req,res){
-    res.render("blog");
-})
+app.get("/blog", function (req, res) {
+  res.render("blog");
+});
+//create a route for about us page
+
+app.get("/aboutus", function (req, res) {
+  res.render("aboutUs");
+});
 // app.get("/home", function(req, res) {
 
 //     res.render("home");
 // });
 
-app.get("/register", function(req, res) {
-
-    res.render("register");
+app.get("/register", function (req, res) {
+  res.render("register");
 });
 
 
@@ -100,13 +103,7 @@ app.get("/register", function(req, res) {
 
 
 
-
-
-
-
-
 //Create a route for testing the db
-
 // console.log("hi");
 // app.get("/home", function(req, res) {
 //     // Retrieve trainers data from the database
@@ -114,7 +111,7 @@ app.get("/register", function(req, res) {
 //     db.query(sql).then(trainers => {
 //             // Log the trainers data
 //             console.log('Trainers data:', trainers);
-            
+
 //             // Render the 'home' template and pass the 'trainers' data
 //             res.render('home', { trainers:trainers });
 //         })
@@ -127,22 +124,22 @@ app.get("/register", function(req, res) {
 
 // Create a route for /goodbye
 // Responds to a 'GET' request
-app.get("/goodbye", function(req, res) {
-    res.send("Goodbye world!");
+app.get("/goodbye", function (req, res) {
+  res.send("Goodbye world!");
 });
 
 // Create a dynamic route for /hello/<name>, where name is any value provided by user
 // At the end of the URL
 // Responds to a 'GET' request
-app.get("/hello/:name", function(req, res) {
-    // req.params contains any parameters in the request
-    // We can examine it in the console for debugging purposes
-    console.log(req.params);
-    //  Retrieve the 'name' parameter and use it in a dynamically generated page
-    res.send("Hello " + req.params.name);
+app.get("/hello/:name", function (req, res) {
+  // req.params contains any parameters in the request
+  // We can examine it in the console for debugging purposes
+  console.log(req.params);
+  //  Retrieve the 'name' parameter and use it in a dynamically generated page
+  res.send("Hello " + req.params.name);
 });
 
 // Start server on port 3000
-app.listen(3000,function(){
-    console.log(`Server running at http://127.0.0.1:3000/`);
+app.listen(3000, function () {
+  console.log(`Server running at http://127.0.0.1:3000/`);
 });
