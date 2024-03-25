@@ -1,7 +1,6 @@
 // Import express.js
 const express = require("express");
 const bodyParser = require("body-parser");
-const User = require("./user");
 const db = require("./services/db");
 
 
@@ -49,10 +48,10 @@ app.get("/home", async function(req, res) {
 
 // Post login data
 app.post('/login', async function(req, res) {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     try {
-        const sql = "SELECT * FROM user_table WHERE user_name = ? AND user_password = ?";
-        const [user] = await db.query(sql, [username, password]);
+        const sql = "SELECT * FROM user_table WHERE user_email = ? AND user_password = ?";
+        const [user] = await db.query(sql, [email, password]);
         if (user) {
             // Fetch trainers data and render home template
             const trainers = await fetchTrainersData();
@@ -65,6 +64,57 @@ app.post('/login', async function(req, res) {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+app.get("/register", function (req, res) {
+    res.render("register");
+  });
+
+
+//create register router
+app.post('/register', async function(req, res) {
+    console.log("Received registration request");
+    const { firstname, lastname, useremail, userphone, usertype, password, confirm_password } = req.body;
+    
+    try {
+        // Check if the email is already registered
+        const emailExists = await checkIfEmailExists(useremail);
+        if (emailExists) {
+            return res.status(400).json({ error: 'Email already registered', field: 'useremail' });
+        }
+        
+        // Check if password and confirm password match
+        if (password !== confirm_password) {
+            return res.status(400).json({ error: 'Password and confirm password do not match', field: 'confirm_password' });
+        }
+        
+        // Proceed with registration if all checks pass
+        const sql = "INSERT INTO user_table (user_firstname, user_lastname, user_email, user_phonenumber, user_type, user_password) VALUES (?, ?, ?, ?, ?, ?)";
+        const values = [firstname, lastname, useremail, userphone, usertype, password];
+        await db.query(sql, values);
+        console.log("Registration successful");
+        res.status(200).send("Registration successful");
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+async function checkIfEmailExists(email) {
+    try {
+        const sql = "SELECT COUNT(*) AS count FROM user_table WHERE user_email = ?";
+        const [rows] = await db.query(sql, [email]);
+        if (rows.length > 0 && rows[0].count > 0) {
+            return true; // Email exists
+        } else {
+            return false; // Email does not exist
+        }
+    } catch (error) {
+        console.error("Error checking email existence:", error);
+        return true; // Return true to handle the error gracefully
+    }
+}
+
 
 
 //create a route for blog page
@@ -82,9 +132,7 @@ app.get("/aboutus", function (req, res) {
 //     res.render("home");
 // });
 
-app.get("/register", function (req, res) {
-  res.render("register");
-});
+
 
 
 // Serve static files. CSS, Images, JS files ... etc

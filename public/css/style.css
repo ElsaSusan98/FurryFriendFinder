@@ -1448,7 +1448,9 @@ blockquote h4 {
 .register-page input[type="text"],
 .register-page input[type="email"],
 .register-page input[type="tel"],
-.register-page input[type="password"] {
+.register-page input[type="password"] ,
+select[type="usertype"]
+{
     width: 100%;
     padding: 10px;
     margin: 5px 0;
