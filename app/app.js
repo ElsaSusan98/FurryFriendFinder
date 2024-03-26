@@ -32,6 +32,11 @@ app.get("/blog", function (req, res) {
 app.get("/aboutus", function (req, res) {
   res.render("aboutUs");
 });
+//create a route for finder page
+
+app.get("/finder", function (req, res) {
+  res.render("finder");
+});
 // app.get("/home", function(req, res) {
 
 //     res.render("home");
