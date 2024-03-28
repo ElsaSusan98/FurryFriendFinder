@@ -1630,7 +1630,7 @@ div {
 }
 
 .about .about-content .about1 .img{
-    flex: 1 1 45rem;
+    flex: 1 1 25rem;
 }
 
 .about .about-content .about1 .img img{
@@ -1639,7 +1639,7 @@ div {
 }
 
 .about .about-content .about1 .content{
-    flex: 1 1 45rem;
+    flex: 1 1 25rem;
 }
 
 .about .about-content .about1 .content p {
@@ -1730,3 +1730,68 @@ div {
 }
     }
 
+/*finder page*/
+
+.finder-content {
+    max-width: 1280px;
+    margin: 0 auto 40px;
+    width: 100%;
+    margin-left: 30%;
+}
+.finder-content h1 {
+    color: #262323;
+    font-size: 3rem;
+    max-width: 630px;
+    line-height: 65px;
+}
+.finder-content .search-form {
+    height: 48px;
+    display: flex;
+    max-width: 630px;
+    margin-top: 30px;
+}
+.finder-content .search-form input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0 15px;
+    font-size: 1rem;
+    border-radius: 4px 0 0 4px;
+}
+.finder-content .search-form button {
+    height: 100%;
+    width: 60px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #1dbf73;
+    color: #fff;
+    border-radius: 0 4px 4px 0;
+    transition: background 0.2s ease;
+}
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+@media screen and (max-width: 900px)
+.finder-content .search-form input {
+    border-radius: 4px;
+}
+@media screen and (max-width: 900px)
+.finder-content .search-form button {
+    margin-top: 10px;
+    border-radius: 4px;
+    width: 100%;
+}
