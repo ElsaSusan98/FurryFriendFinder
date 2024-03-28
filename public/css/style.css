@@ -1782,16 +1782,18 @@ div {
     white-space: nowrap;
     word-wrap: normal;
     direction: ltr;
-    -webkit-font-feature-settings: 'liga';
+    /* -webkit-font-feature-settings: 'liga'; */
     -webkit-font-smoothing: antialiased;
 }
-@media screen and (max-width: 900px)
-.finder-content .search-form input {
-    border-radius: 4px;
-}
-@media screen and (max-width: 900px)
+
+
+@media screen and (max-width: 900px){
+    .finder-content .search-form input {
+        border-radius: 4px;
+    }
 .finder-content .search-form button {
     margin-top: 10px;
     border-radius: 4px;
     width: 100%;
+}
 }
