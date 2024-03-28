@@ -1,12 +1,14 @@
 // Import express.js
 const express = require("express");
 const bodyParser = require("body-parser");
-const User = require("./user");
 const db = require("./services/db");
+
+
 
 // Create express app
 var app = express();
-
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 // Add static files location
 app.use(express.static("public"));
 
@@ -14,13 +16,106 @@ app.set("view engine", "pug");
 app.set("views", "./app/views");
 
 // Create a route for root - /
-app.get("/", function (req, res) {
-  res.render("home");
+app.get("/", function(req, res) {
+    res.render("index");
 });
 // Create a route for root - /
 app.get("/login", function (req, res) {
   res.render("index");
 });
+// Function to fetch trainers data from the database
+async function fetchTrainersData() {
+    try {
+        const sql = 'SELECT * FROM trainer_table';
+        const trainers = await db.query(sql);
+        return trainers;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+// Route for rendering homepage (/home)
+app.get("/home", async function(req, res) {
+    try {
+        const trainers = await fetchTrainersData();
+        res.render('home', { trainers });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Post login data
+app.post('/login', async function(req, res) {
+    const { email, password } = req.body;
+    try {
+        const sql = "SELECT * FROM user_table WHERE user_email = ? AND user_password = ?";
+        const [user] = await db.query(sql, [email, password]);
+        if (user) {
+            // Fetch trainers data and render home template
+            const trainers = await fetchTrainersData();
+            res.render('home', { trainers });
+        } else {
+            res.status(401).send('Invalid username or password');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get("/register", function (req, res) {
+    res.render("register");
+  });
+
+
+//create register router
+app.post('/register', async function(req, res) {
+    console.log("Received registration request");
+    const { firstname, lastname, useremail, userphone, usertype, password, confirm_password } = req.body;
+    
+    try {
+        // Check if the email is already registered
+        const emailExists = await checkIfEmailExists(useremail);
+        if (emailExists) {
+            return res.status(400).json({ error: 'Email already registered', field: 'useremail' });
+        }
+        
+        // Check if password and confirm password match
+        if (password !== confirm_password) {
+            return res.status(400).json({ error: 'Password and confirm password do not match', field: 'confirm_password' });
+        }
+        
+        // Proceed with registration if all checks pass
+        const sql = "INSERT INTO user_table (user_firstname, user_lastname, user_email, user_phonenumber, user_type, user_password) VALUES (?, ?, ?, ?, ?, ?)";
+        const values = [firstname, lastname, useremail, userphone, usertype, password];
+        await db.query(sql, values);
+        console.log("Registration successful");
+        res.status(200).send("Registration successful");
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+async function checkIfEmailExists(email) {
+    try {
+        const sql = "SELECT COUNT(*) AS count FROM user_table WHERE user_email = ?";
+        const [rows] = await db.query(sql, [email]);
+        if (rows.length > 0 && rows[0].count > 0) {
+            return true; // Email exists
+        } else {
+            return false; // Email does not exist
+        }
+    } catch (error) {
+        console.error("Error checking email existence:", error);
+        return true; // Return true to handle the error gracefully
+    }
+}
+
+
 
 //create a route for blog page
 
@@ -42,9 +137,8 @@ app.get("/finder", function (req, res) {
 //     res.render("home");
 // });
 
-app.get("/register", function (req, res) {
-  res.render("register");
-});
+
+
 
 // Serve static files. CSS, Images, JS files ... etc
 
@@ -59,40 +153,10 @@ app.get("/register", function (req, res) {
 //     res.redirect('/');
 // });
 
-// Post login data
-app.post("/login", (req, res, next) => {
-  // Creating an instance of the User object
-  const user = new User();
 
-  // Call the login function on the user object
-  user.login(req.body.username, req.body.password, function (result) {
-    if (result) {
-      // Handling successful login
-      req.session.user = result;
-      req.session.opp = 1;
-      res.redirect("/home");
-    } else {
-      // Handling failed login
-      res.send("Username/Password incorrect!");
-    }
-  });
-});
+
 
 //Create a route for testing the db
-app.get("/home", function (req, res) {
-  // Assumes a table called test_table exists in your database
-  var trainerlist = [];
-
-  const sql = "select * from trainer_table";
-  db.query(sql).then((results) => {
-    //   console.log(results);
-    //res.send(results);
-    res.render("home", { trainers: results });
-  });
-  /*db.query(sql,error,result => {
-        console.log(result);
-    });*/
-});
 // console.log("hi");
 // app.get("/home", function(req, res) {
 //     // Retrieve trainers data from the database
