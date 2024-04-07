@@ -1,6 +1,6 @@
 .register-page
   .container
-    form(method="post", action="/register")
+    form(method="post", action="/register", id="register-form")
         label(for='register_fname') First Name:
         input#register_fname(type='text', name='firstname', required='')
         label(for='register_lname') Last Name:
@@ -24,58 +24,39 @@
         input#register_submit(type='submit', value='Register')
 
 script.
-        document.getElementById("register_submit").addEventListener("click", async function(event) {
-        event.preventDefault(); // Prevent form submission
-        var password = document.getElementById("register_password").value;
-        var confirm_password = document.getElementById("register_confirm_password").value;
-        var email_error = document.getElementById("email-error");
-        var password_error = document.getElementById("password-error");
+    
+    document.getElementById('register-form').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent default form submission
+        
+        // Get form data
+        const formData = new FormData(event.target);
 
-        // Clear any previous error messages
-        email_error.innerText = "";
-        password_error.innerText = "";
+       try {
+  // Send form data to server using fetch API
+        const response = await fetch('/register', {
+        method: 'POST',
+        body: formData
+         });
 
-        // Check if password and confirm password match
-        if (password !== confirm_password) {
-            password_error.innerText = "Password and confirm password do not match";
-            return;
+        console.log(response);
+
+        // Parse response JSON
+        const data = await response.json();
+        console.log(data);
+        // Check if there's an error message for email
+        if (data.error === 'Email already registered') {
+            document.getElementById('email-error').textContent = data.error;
+        } else {
+            // Clear any existing error messages
+            document.getElementById('email-error').textContent = '';
+            document.getElementById('password-error').textContent = '';
+
+            // Optionally, you can redirect the user after successful registration
+            window.location.href = '/home'; // Redirect to home page
         }
-
-        try {
-            const response = await fetch('/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    firstname: document.getElementById("register_fname").value,
-                    lastname: document.getElementById("register_lname").value,
-                    useremail: document.getElementById("register_email").value,
-                    userphone: document.getElementById("register_phone").value,
-                    usertype: document.getElementById("usertype").value,
-                    password: password,
-                    confirm_password: confirm_password
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Registration successful
-                alert("Registration successful");
-            } else {
-                // Registration failed, display error message
-                if (data.field === 'useremail') {
-                    email_error.innerText = data.error;
-                } else if (data.field === 'confirm_password') {
-                    password_error.innerText = data.error;
-                } else {
-                    // Handle other error cases
-                    alert("An error occurred while processing your request. Please try again later.");
-                }
-            }
         } catch (error) {
-            console.error("Error:", error);
-            alert("An error occurred while processing your request. Please try again later.");
+        console.error('Error:', error);
+        // Handle any unexpected errors here
         }
-
+    });
+            
