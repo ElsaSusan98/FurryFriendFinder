@@ -31,6 +31,9 @@ const homeController = {
 
   finder: (req, res) => {
     res.render("finder");
+  },
+  forgot: (req, res) => {
+    res.render("forgot");
   }
 };
 

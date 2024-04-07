@@ -32,6 +32,8 @@ app.post("/register", authController.register);
 app.get("/blog", homeController.blog);
 app.get("/aboutus", homeController.aboutUs);
 app.get("/finder", homeController.finder);
+app.get("/forgot", homeController.forgot);
+
 app.get("/goodbye", (req, res) => res.send("Goodbye world!"));
 app.get("/hello/:name", (req, res) => res.send("Hello " + req.params.name));
 

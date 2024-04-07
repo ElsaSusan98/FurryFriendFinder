@@ -1881,3 +1881,12 @@ div {
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
   }
+  .forgot_box{
+    width: 500px;
+  height: 350px;
+  background-color: #f0f0f0;
+  border: 2.5px solid #ccc;
+  }
+  .forgot_text {
+    color:grey;
+    }

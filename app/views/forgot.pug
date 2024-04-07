@@ -1,0 +1,15 @@
+extends layout
+block content
+    .register-page
+        .container 
+                .forgot_box
+                    h2  Forgotten Password 
+                    p
+                    br
+                    br
+                    .forgot_text
+                    p  Enter your Email 
+                    label(for='email') Email:
+                    input#email(type='text', name='email')
+                    p
+                    input(type='submit', value='Send New Password')
