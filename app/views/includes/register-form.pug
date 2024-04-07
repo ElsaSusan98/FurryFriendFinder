@@ -1,22 +1,62 @@
-form(method="post" action="/register")
-    table 
-        tr
-            td Username 
-            td 
-                input(type="text" name="username")
-        tr 
-            td Fullname 
-            td 
-                input(type="text" name="fullname")
-        tr 
-            td Password 
-            td 
-                input(type="password" name="password")
-        tr 
-            td Confirm password 
-            td 
-                input(type="password" name="confirm-password")
-        tr 
-            td
-            td
-                input(type="submit" value="Register")
+.register-page
+  .container
+    form(method="post", action="/register", id="register-form")
+        label(for='register_fname') First Name:
+        input#register_fname(type='text', name='firstname', required='')
+        label(for='register_lname') Last Name:
+        input#register_lname(type='text', name='lastname', required='')
+        label(for='register_email') Email:
+        input#register_email(type='email', name='useremail', required='')
+        // Add a span to display error message for email
+        span#email-error(style='color:red')
+        label(for='register_phone') Phone Number:
+        input#register_phone(type='tel', name='userphone', pattern='[0-9]{10}', required='')
+        label(for="userType") User Type:
+        select(type='usertype', name='usertype', required='')
+            option(value="petOwner") Pet Owner
+            option(value="regularUser") Regular User
+        label(for='register_password') Password:
+        input#register_password(type='password', name='password', required='')
+        label(for='register_confirm_password') Confirm Password:
+        input#register_confirm_password(type='password', name='confirm_password', required='')
+        // Add a span to display error message for password mismatch
+        span#password-error(style='color:red')
+        input#register_submit(type='submit', value='Register')
+
+script.
+    
+    document.getElementById('register-form').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent default form submission
+        
+        // Get form data
+        const formData = new FormData(event.target);
+
+       try {
+  // Send form data to server using fetch API
+        const response = await fetch('/register', {
+        method: 'POST',
+        body: formData
+         });
+
+        console.log(response);
+
+        // Parse response JSON
+        const data = await response.json();
+        console.log(data);
+        // Check if there's an error message for email
+        if (data.error === 'Email already registered') {
+            document.getElementById('email-error').textContent = data.error;
+        } else {
+            // Clear any existing error messages
+            document.getElementById('email-error').textContent = '';
+            document.getElementById('password-error').textContent = '';
+
+            // Optionally, you can redirect the user after successful registration
+            window.location.href = '/home'; // Redirect to home page
+        }
+        } catch (error) {
+        console.error('Error:', error);
+        // Handle any unexpected errors here
+        }
+    });
+            
