@@ -1,5 +1,11 @@
 .container_login
-    
+      //- Display error message if flash message exists
+      if flash.error
+        .alert.alert-danger= flash.error
+
+      //- Display success message if flash message exists
+      if flash.success
+        .alert.alert-success= flash.success
       form(action='/login', method='POST')
         label(for='email') Email:
         input#login_email(type='email', name='email', required='')

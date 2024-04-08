@@ -8,13 +8,16 @@ const authController = {
       const [user] = await db.query(sql, [email, password]);
       if (user) {
         // You might want to set session variables here or generate JWT tokens for authentication
+        req.flash('success', 'Login successful'); // Set success flash message
         res.redirect("/home"); // Redirect to home page upon successful login
       } else {
-        res.status(401).send('Invalid username or password');
+        req.flash('error', 'Invalid username or password'); // Set error flash message
+        res.redirect("/login"); // Redirect back to login page with flash message
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Internal server error' });
+      req.flash('error', 'Internal server error'); // Set error flash message
+      res.redirect("/login"); // Redirect back to login page with flash message
     }
   },
 
@@ -25,26 +28,30 @@ const authController = {
       // Check if the email is already registered
       const emailExists = await checkIfEmailExists(useremail);
       if (emailExists) {
-        return res.status(400).json({ error: 'Email already registered', field: 'useremail' });
+        req.flash('error', 'Email already registered'); // Set error flash message
+        return res.redirect("/register"); // Redirect back to register page with flash message
       }
 
       // Check if password and confirm password match
       if (password !== confirm_password) {
-        return res.status(400).json({ error: 'Password and confirm password do not match', field: 'confirm_password' });
+        req.flash('error', 'Password and confirm password do not match'); // Set error flash message
+        return res.redirect("/register"); // Redirect back to register page with flash message
       }
 
       // Proceed with registration if all checks pass
       const sql = "INSERT INTO user_table (user_firstname, user_lastname, user_email, user_phonenumber, user_type, user_password) VALUES (?, ?, ?, ?, ?, ?)";
       const values = [firstname, lastname, useremail, userphone, usertype, password];
       await db.query(sql, values);
-      console.log("Registration successful");
-      res.status(200).send("Registration successful");
+      req.flash('success', 'Registration successful'); // Set success flash message
+      res.redirect("/home"); // Redirect to login page upon successful registration
     } catch (error) {
       console.error("Error:", error);
       if (error.code === 'ER_DUP_ENTRY') {
-        return res.status(400).json({ error: 'Email already registered', field: 'useremail' });
+        req.flash('error', 'Email already registered');
+        return res.redirect("/register");
       } else {
-        res.status(500).json({ error: 'Internal server error' });
+        req.flash('error', 'Internal server error');
+        return res.redirect("/register");
       }
     }
   }
