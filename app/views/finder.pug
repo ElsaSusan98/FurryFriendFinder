@@ -1,4 +1,5 @@
 extends layout
+
 block content
     .body-content
         section.finder
@@ -8,67 +9,23 @@ block content
             h1 Find your perfect pet trainer
             form.search-form(action='#')
                 input(type='text', placeholder='Search by name or postcode', required='')
-                button.material-symbols-outlined(type='sumbit') search
+                button.material-symbols-outlined(type='submit') search
         section.our-team
-            .row
-                .column
-                    .card
-                        img(src='/img/testimonial-1.jpg', alt='Jane', style='width:100%')
-                        .container
-                            h2 Rose Alfred
-                            p.title Senior Pet trainer
-                            p Some text that describes me lorem ipsum ipsum lorem.
-                            p rose@example.com
-                            p
-                                button.button view more
-                .column
-                    .card
-                        img(src='/img/testimonial-2.jpg', alt='Rose', style='width:100%')
-                        .container
-                            h2 Jane Jimmington
-                            p.title Senior Pet trainer
-                            p Some text that describes me lorem ipsum ipsum lorem.
-                            p jane@example.com
-                            p
-                                button.button view more
-                .column
-                    .card
-                        img(src='/img/trainer.jpg', alt='John', style='width:100%')
-                        .container
-                            h2 John Jacob
-                            p.title Senior pet trainer
-                            p Some text that describes me lorem ipsum ipsum lorem.
-                            p john@example.com
-                            p
-                                button.button view more
-            .row
-                .column
-                    .card
-                        img(src='/img/Man1.jpg', alt='Jane', style='width:100%')
-                        .container
-                            h2 Rose Alfred
-                            p.title Senior Pet trainer
-                            p Some text that describes me lorem ipsum ipsum lorem.
-                            p rose@example.com
-                            p
-                                button.button view more
-                .column
-                    .card
-                        img(src='/img/Man2.jpg', alt='Rose', style='width:100%')
-                        .container
-                            h2 Jane Jimmington
-                            p.title Senior Pet trainer
-                            p Some text that describes me lorem ipsum ipsum lorem.
-                            p jane@example.com
-                            p
-                                button.button view more
-                .column
-                    .card
-                        img(src='/img/Man3.jpg', alt='John', style='width:100%')
-                        .container
-                            h2 John Jacob
-                            p.title Senior pet trainer
-                            p Some text that describes me lorem ipsum ipsum lorem.
-                            p john@example.com
-                            p
-                                button.button view more
+            .container
+                .row.d-flex 
+                    each trainer, index in trainers
+                        if index % 3 === 0
+                            .row 
+                                each _, i in [0, 1, 2] 
+                                    - const currIndex = index + i
+                                    - const currTrainer = trainers[currIndex]
+                                    if currTrainer
+                                        .col-md-4.mb-3 
+                                            .card
+                                                img.card-img-top(src=currTrainer.trainer_image, alt=currTrainer.trainer_name, style='width:100%')
+                                                .card-body
+                                                    h5.card-title #{currTrainer.trainer_name}
+                                                    p.card-text.title #{currTrainer.trainer_speciality}
+                                                    p.card-text.trainer-spec Experience: #{currTrainer.trainer_experience}
+                                                    p.card-text #{currTrainer.trainer_email}
+                                                button.btn.btn-primary(type='button') View More
