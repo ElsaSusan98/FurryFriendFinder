@@ -1,0 +1,19 @@
+body
+    .banner
+      h1 Contact Us
+    .contact-info
+      p Phone: 128-496-6890
+      p Email: info@example.com
+      p Address: 119 Main Street, oxford, England
+    .contact-form
+      form(action='#', method='post')
+        input(type='text', name='name', placeholder='Your Name', required='')
+        br
+        input(type='tel', name='phone', placeholder='Phone Number', pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}', required='')
+        br
+        input(type='email', name='email', placeholder='Email', required='')
+        br
+        textarea(name='message', placeholder='Your Message', required='')
+        br
+        input(type='submit', value='Submit')
+      iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2486.098746059512!2d-0.24722452383914612!3d51.45634341443251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760ee6c0c242eb%3A0x3a5665ce81752bbf!2sUniversity%20of%20Roehampton%20London!5e0!3m2!1sen!2suk!4v1712825743492!5m2!1sen!2suk', width='600', height='450', style='border:0;', allowfullscreen='', loading='lazy', referrerpolicy='no-referrer-when-downgrade')

@@ -1881,3 +1881,82 @@ div {
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
   }
+
+
+  /* contact us page */
+
+  /* Reset default styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styles for the banner */
+.banner {
+    width: 100%;
+    height: 200px; /* Adjust height as needed */
+    background-image: url('./about.webp'); /* Update image URL here */
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: white;
+    padding-top: 50px;
+}
+
+/* Styles for the contact information */
+.contact-info {
+    text-align: center;
+    padding: 20px;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    font-size: 20px; /* Increase font size */
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Set text color */
+}
+
+.contact-info strong {
+    font-weight: normal; /* Remove bold from labels */
+}
+
+/* Styles for the contact form */
+.contact-form {
+    max-width: 600px;
+    margin: 20px auto; /* Center the form horizontally */
+    padding: 20px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="tel"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.contact-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.contact-form textarea {
+    height: 150px; /* Adjust height as needed */
+}
+
+/* Styles for the map iframe */
+iframe.map {
+    width: 600px; /* Set a standard width for the map */
+    height: 400px; /* Set a standard height for the map */
+   
+    display: block; /* Ensure block display for proper centering */
+    padding-top: 50px;
+}
+
