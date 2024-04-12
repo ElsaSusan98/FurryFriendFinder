@@ -1,0 +1,37 @@
+body
+    .banner
+      img(src='./about.webp', alt='Pet Trainee Banner')
+    .container
+      .trainer-details
+        img(src='trainer.webp', alt='Trainer Image')
+        .trainer-description
+          h2 Trainer Description
+          p
+            | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet tellus ac eros vehicula gravida.
+            | Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nunc et ex
+            | et quam pellentesque pharetra.
+          .ratings-feedback
+            h3 Ratings and Feedback
+            // Add ratings and feedback here
+    .appointment-form
+      h2 Book an Appointment
+      form(action='#', method='POST')
+        .form-group
+          label(for='name') Name:
+          input#name(type='text', name='name', required='')
+        .form-group
+          label(for='phone') Phone Number:
+          input#phone(type='tel', name='phone', required='')
+        .form-group
+          label(for='email') Email:
+          input#email(type='email', name='email', required='')
+        .form-group
+          label(for='pet-name') Pet Name:
+          input#pet-name(type='text', name='pet-name', required='')
+        .form-group
+          label(for='pet-breed') Pet Breed:
+          input#pet-breed(type='text', name='pet-breed', required='')
+        .form-group
+          label(for='query') Any Query:
+          textarea#query(name='query')
+        button(type='submit') Book Appointment
