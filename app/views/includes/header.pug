@@ -1,5 +1,29 @@
-nav 
-    ul 
-        block links
-        li 
-            a(href="/") Home
+header.myHeader#myHeader
+    nav
+        .logo
+            a(href="/home")
+                img(src="img/logo.png" alt="Logo")
+        .nav-links#navLinks
+            i.fa.fa-times(onclick="hideMenu()")
+            ul.list-item
+                li
+                    a(href="/home") HOME
+                li
+                    a(href="/aboutUs") ABOUT US
+                li
+                    a(href="/finder") FINDER
+                li
+                    a(href="/blog") BLOG
+                li
+                    a(href="/contact") CONTACT US
+            i.fa.fa-bars(onclick="showMenu()")
+        .fav-icons
+            ul
+                li
+                    a(href="/login")
+                        span.mdi--user
+                li
+                    a(href="/register")
+                        span.mdi--register
+                li
+                    i.fa-solid.fa-cart-shopping
