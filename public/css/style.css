@@ -158,7 +158,7 @@ body
 {    
     width: 90%;   
 }
-input[type="text"], input[type="password"]
+/* input[type="text"], input[type="password"]
 {
     padding: 8px 5px;
     margin: 0 0 5px 5px;
@@ -177,7 +177,7 @@ input[type="submit"]
     border: 1px solid #0285b9;
     cursor: pointer;
     margin-top: 4px;
-}
+} */
 form a{
     float: right;
     padding: 7px 20px;
@@ -1494,18 +1494,27 @@ blockquote h4 {
     border-radius: 5px;
   }
   
-  button[type="submit"] {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+  .submit-button-style {
+    background-color: #7e4c4f;
+    border: medium none;
     cursor: pointer;
+    margin-top: 30px;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 50px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 18px 30px 17px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all .3s ease 0s;
   }
   
-  button[type="submit"]:hover {
-    background-color: #555;
-  }
+  .submit-button-style:hover {
+    background-color: #242424;
+}
 
 
   /*register new style*/
@@ -1536,7 +1545,7 @@ select[type="usertype"]
     width: 100%;
     padding: 10px;
     margin-top: 10px;
-    background-color: blue;
+    background-color: #7e4c4f;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -1544,7 +1553,7 @@ select[type="usertype"]
 }
 
 .register-page input[type="submit"]:hover {
-    background-color: blue;
+    background-color: #242424;
 }
 
 /*new login style*/
@@ -1571,7 +1580,7 @@ select[type="usertype"]
 #login_submit {
     width: 100%;
     margin-top: 10px;
-    background-color: blue;
+    background-color: #7e4c4f;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -1579,7 +1588,7 @@ select[type="usertype"]
 }
 
 #login_submit:hover {
-    background-color:blue;
+    background-color:#242424;
 }
 
 .login-panel img {
@@ -1889,3 +1898,122 @@ div {
     border-color: #f5c6cb;
     border-radius: 5px;
 }
+
+
+  /* contact us page */
+
+
+
+
+
+/* Styles for the contact information */
+.contact-info {
+    text-align: center;
+    padding: 20px;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    font-size: 20px; /* Increase font size */
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Set text color */
+}
+
+.contact-info strong {
+    font-weight: normal; /* Remove bold from labels */
+}
+
+/* Styles for the contact form */
+.contactus-form {
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contactus-form input[type="text"],
+.contactus-form input[type="email"],
+.contactus-form input[type="tel"],
+.contactus-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px 0px 10px 0px;
+    min-width: 270px;
+    font-size: 1.05em;
+}
+
+
+
+/* .contact-form textarea {
+    height: 150px; 
+} */
+
+/* Styles for the map iframe */
+iframe.map {
+    width: 600px; /* Set a standard width for the map */
+    height: 400px; /* Set a standard height for the map */
+   
+    display: block; /* Ensure block display for proper centering */
+    padding-top: 50px;
+}
+
+/*trainer appointment styles*/
+
+.trainer-details {
+    display: flex;
+    align-items: flex-start;
+}
+
+.trainer-details img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.trainer-description {
+    flex: 1;
+}
+
+.ratings-feedback {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.appointment-form {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.appointment-form h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
+

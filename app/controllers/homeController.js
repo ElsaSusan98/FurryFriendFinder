@@ -55,6 +55,9 @@ const homeController = {
       console.error(error);
       res.status(500).json({ error: 'Internal server error' });
     }
+  },
+  contact:(req, res) => {
+    res.render("contactUs");
   }
   
   
