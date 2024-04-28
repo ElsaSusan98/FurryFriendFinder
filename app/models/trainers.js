@@ -1,19 +1,20 @@
 // trainers.js
 const db = require("../services/db");
 
+
 const Trainer = {
   fetchAll: async () => {
-    try {
-      const sql = 'SELECT * FROM trainer_table';
-      const trainers = await db.query(sql);
-      return trainers;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    // Assuming this method fetches all trainers from the database
+   
+    return await db.query('SELECT * FROM trainer_table');
   },
-  
-  // Add more methods as needed
+  search: async (query) => {
+    // Assuming this method searches for trainers based on the query
+
+    return await db.query('SELECT * FROM trainer_table WHERE trainer_name LIKE ? OR trainer_location LIKE ?', [`%${query}%`, `%${query}%`]);
+  }
 };
 
 module.exports = Trainer;
+
+

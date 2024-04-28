@@ -7,8 +7,8 @@ block content
                 h2 Finder 
         section.finder-content
             h1 Find your perfect pet trainer
-            form.search-form(action='#')
-                input(type='text', placeholder='Search by name or postcode', required='')
+            form.search-form(action='/finder', method='GET')
+                input(type='text', name='query', placeholder='Search by name or postcode', value=query,require='')
                 button.material-symbols-outlined(type='submit') search
         section.our-team
             .container
@@ -29,3 +29,5 @@ block content
                                                     p.card-text.trainer-spec Experience: #{currTrainer.trainer_experience}
                                                     p.card-text #{currTrainer.trainer_email}
                                                 button.btn.btn-primary(type='button') View More
+                    else 
+                        p No trainers found
