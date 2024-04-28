@@ -12,7 +12,17 @@ const Trainer = {
     // Assuming this method searches for trainers based on the query
 
     return await db.query('SELECT * FROM trainer_table WHERE trainer_name LIKE ? OR trainer_location LIKE ?', [`%${query}%`, `%${query}%`]);
+  },
+  findById: async (id) => {
+    // Fetch a trainer by ID
+    try {
+      const trainer = await db.query('SELECT * FROM trainer_table WHERE trainer_id = ?', [id]);
+      return trainer[0];
+    } catch (error) {
+      throw new Error(error);
+    }
   }
+
 };
 
 module.exports = Trainer;

@@ -1,4 +1,6 @@
 const db = require("../services/db");
+const nodemailer = require("nodemailer");
+const Appointment = require("../models/appoinment");
 
 const authController = {
   login: async (req, res) => {
@@ -7,7 +9,7 @@ const authController = {
       const sql = "SELECT * FROM user_table WHERE user_email = ? AND user_password = ?";
       const [user] = await db.query(sql, [email, password]);
       if (user) {
-        // You might want to set session variables here or generate JWT tokens for authentication
+        req.session.userId = user.user_id; // Store the user's ID in the session
         req.flash('success', 'Login successful'); // Set success flash message
         res.redirect("/home"); // Redirect to home page upon successful login
       } else {
@@ -54,7 +56,8 @@ const authController = {
         return res.redirect("/register");
       }
     }
-  }
+  },
+
 };
 
 async function checkIfEmailExists(email) {
@@ -71,5 +74,6 @@ async function checkIfEmailExists(email) {
     throw error; // Rethrow the error to be caught by the caller
   }
 }
+
 
 module.exports = authController;

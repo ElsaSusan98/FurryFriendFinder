@@ -28,6 +28,6 @@ block content
                                                     p.card-text.title #{currTrainer.trainer_speciality}
                                                     p.card-text.trainer-spec Experience: #{currTrainer.trainer_experience}
                                                     p.card-text #{currTrainer.trainer_email}
-                                                button.btn.btn-primary(type='button') View More
+                                                a.btn.btn-primary(href=`/trainer/${currTrainer.trainer_id}`) View More
                     else 
                         p No trainers found

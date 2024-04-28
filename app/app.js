@@ -6,6 +6,9 @@ const db = require("./services/db");
 
 const authController = require("./controllers/authController");
 const homeController = require("./controllers/homeController");
+const trainerController = require("./controllers/trainerController"); 
+const appointmentController = require('./controllers/appoinmentController');
+
 
 const app = express();
 
@@ -39,7 +42,10 @@ app.get("/register", homeController.register);
 app.post("/register", authController.register);
 app.get("/blog", homeController.blog);
 app.get("/aboutus", homeController.aboutUs);
-app.get("/finder", homeController.finder);
+app.get('/finder', trainerController.finder);
+app.get('/trainer/:id', trainerController.details);
+app.post('/book-appointment/:id', appointmentController.bookAppointment);
+
 app.get("/contact", homeController.contact);
 
 app.get("/goodbye", (req, res) => res.send("Goodbye world!"));
