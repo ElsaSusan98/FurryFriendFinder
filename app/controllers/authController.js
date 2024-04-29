@@ -1,6 +1,7 @@
 const db = require("../services/db");
 const nodemailer = require("nodemailer");
 const Appointment = require("../models/appoinment");
+const Trainer = require('../models/trainers');
 
 const authController = {
   login: async (req, res) => {
@@ -8,9 +9,19 @@ const authController = {
     try {
       const sql = "SELECT * FROM user_table WHERE user_email = ? AND user_password = ?";
       const [user] = await db.query(sql, [email, password]);
+      console.log("User details:", user); // Add this line for debugging
       if (user) {
         req.session.userId = user.user_id; // Store the user's ID in the session
+        req.session.userType = user.user_type; // Store the user's type in the session
         console.log("Logged-in User ID:", req.session.userId); // Log the logged-in user's ID
+        console.log("Logged-in User Type:", req.session.userType); // Log the logged-in user's type
+
+        if (user.user_type === 'petTrainer') {
+          // Fetch trainer details if the user is a trainer
+          const trainer = await Trainer.findByUserId(req.session.userId);
+          req.session.trainer = trainer; // Store trainer details in the session
+        }
+
         req.flash('success', 'Login successful'); // Set success flash message
         return res.redirect("/home"); // Redirect to home page upon successful login
       } else {
@@ -36,7 +47,7 @@ const authController = {
 
   register: async (req, res) => {
     const { firstname, lastname, useremail, userphone, usertype, password, confirm_password } = req.body;
-
+  
     try {
       // Check if the email is already registered
       const emailExists = await checkIfEmailExists(useremail);
@@ -44,17 +55,25 @@ const authController = {
         req.flash('error', 'Email already registered'); // Set error flash message
         return res.redirect("/register"); // Redirect back to register page with flash message
       }
-
+  
       // Check if password and confirm password match
       if (password !== confirm_password) {
         req.flash('error', 'Password and confirm password do not match'); // Set error flash message
         return res.redirect("/register"); // Redirect back to register page with flash message
       }
-
+  
       // Proceed with registration if all checks pass
-      const sql = "INSERT INTO user_table (user_firstname, user_lastname, user_email, user_phonenumber, user_type, user_password) VALUES (?, ?, ?, ?, ?, ?)";
-      const values = [firstname, lastname, useremail, userphone, usertype, password];
-      await db.query(sql, values);
+      const userInsert = "INSERT INTO user_table (user_firstname, user_lastname, user_email, user_phonenumber, user_type, user_password) VALUES (?, ?, ?, ?, ?, ?)";
+      const userValues = [firstname, lastname, useremail, userphone, usertype, password];
+      const [userInsertResult] = await db.query(userInsert, userValues);
+  
+      if (usertype === 'petTrainer') {
+        const { speciality, location, experience, description } = req.body;
+        const trainerInsert = "INSERT INTO trainers (trainer_name, trainer_email, trainer_speciality, trainer_location, trainer_experience, trainer_description, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        const trainerValues = [`${firstname} ${lastname}`, useremail, speciality, location, experience, description, userInsertResult.insertId];
+        await db.query(trainerInsert, trainerValues);
+      }
+  
       req.flash('success', 'Registration successful'); // Set success flash message
       res.redirect("/home"); // Redirect to login page upon successful registration
     } catch (error) {
@@ -68,6 +87,55 @@ const authController = {
       }
     }
   },
+  updateProfile: async (req, res) => {
+    const { name, email, phone, experience, location, bio } = req.body;
+    const { id } = req.params;
+  
+    try {
+      // Update user details
+      const updateUserQuery = "UPDATE user_table SET user_firstname = ?, user_email = ?, user_phonenumber = ? WHERE user_id = ?";
+      await db.query(updateUserQuery, [name, email, phone, req.session.userId]);
+  
+      // Update trainer details
+      await Trainer.update({
+        name,
+        email,
+        phone,
+        experience,
+        location,
+        bio,
+        userId: req.session.userId
+      });
+  
+      res.redirect("/trainer-profile"); 
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  },
+  deleteProfile: async (req, res) => {
+    try {
+      const userId = req.session.userId;
+      
+      // Delete the trainer profile
+      await Trainer.deleteByUserId(userId);
+
+      // Delete the user
+      const deleteUserQuery = "DELETE FROM user_table WHERE user_id = ?";
+      await db.query(deleteUserQuery, [userId]);
+
+      // Destroy the session
+      req.session.destroy((err) => {
+        if (err) {
+          console.error(err);
+        }
+        res.redirect('/login');
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
 
 };
 

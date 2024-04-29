@@ -1156,13 +1156,24 @@ h3 {
     background-position: center center;
     height: 250px;
 }
-.about-section h2 {
+.about-section h2, .trainer-section h2{
     font-size: 4em;
     line-height: 1em;
     color: #fff;
     font-weight: 900;
     padding: 50px;
 }
+.trainer-section{
+    padding: 50px;
+    text-align: center;
+    background-image: url("/img/banner.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    background-position: center center;
+    height: 250px;
+}
+
 .blog-section {
     padding: 60px 0;
 }
@@ -2036,4 +2047,22 @@ iframe.map {
     color: #000 !important;
     text-decoration: none !important;
     border-style: none !important;
+}
+.appointment-form button{
+    background-color: #7e4c4f;
+    border: medium none;
+    cursor: pointer;
+    margin-top: 30px;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 50px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 18px 30px 17px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all .3s ease 0s;
+    margin-right: 10px;
 }

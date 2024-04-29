@@ -19,12 +19,21 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 // Set up session middleware
-app.use(session({
-  secret: 'secret',
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
+
+app.use((req, res, next) => {
+  res.locals.userId = req.session.userId;
+  res.locals.userType = req.session.userType;
+  res.locals.trainer = req.session.trainer;
+  next();
+});
 // Set up connect-flash middleware
 app.use(flash());
 
@@ -46,7 +55,10 @@ app.get('/trainer/:id', trainerController.details);
 app.post('/book-appointment/:id', appointmentController.bookAppointment);
 app.get("/logout",authController.logout);
 app.get("/contact", homeController.contact);
-
+app.get("/trainer-profile/",trainerController.trainerprofile); // Updated route for fetching trainer profile
+app.get('/trainer-profile-edit/:id', trainerController.editProfile);
+app.post('/update-profile/:id', authController.updateProfile);
+app.post('/delete-profile', authController.deleteProfile);
 
 app.get("/goodbye", (req, res) => res.send("Goodbye world!"));
 app.get("/hello/:name", (req, res) => res.send("Hello " + req.params.name));
