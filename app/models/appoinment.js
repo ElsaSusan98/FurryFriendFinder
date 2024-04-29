@@ -1,10 +1,11 @@
 const db = require("../services/db");
 
 const Appointment = {
-  create: async (userId, trainerId, appointmentDate, appointmentTime) => {
+  create: async (userId, trainerId, petName, petBreed, appointmentDate, appointmentTime, query) => {
     try {
-      const sql = "INSERT INTO appointment_table (user_id, trainer_id, appointment_date, appointment_time, appointment_status) VALUES (?, ?, ?, ?, ?)";
-      const values = [userId, trainerId, appointmentDate, appointmentTime, 'pending'];
+      console.log("Creating appointment with parameters:", userId, trainerId, petName, petBreed, appointmentDate, appointmentTime, query);
+      const sql = "INSERT INTO appointment_table (user_id, trainer_id, pet_name, pet_breed, appointment_date, appointment_time, query, appointment_status) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')";
+      const values = [userId, trainerId, petName, petBreed, appointmentDate, appointmentTime, query];
       await db.query(sql, values);
       return true;
     } catch (error) {

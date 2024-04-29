@@ -1866,8 +1866,8 @@ div {
 }
 .mdi--user {
     display: inline-block;
-    width: 2em;
-    height: 2em;
+    width: 24px;
+    height: 24px;
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4'/%3E%3C/svg%3E");
     background-color: #222;
     -webkit-mask-image: var(--svg);
@@ -1877,11 +1877,11 @@ div {
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
   }
-  .mdi--register {
+  .mdi--logout {
     display: inline-block;
-    width: 2em;
-    height: 2em;
-    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M15 14c-2.67 0-8 1.33-8 4v2h16v-2c0-2.67-5.33-4-8-4m-9-4V7H4v3H1v2h3v3h2v-3h3v-2m6 2a4 4 0 0 0 4-4a4 4 0 0 0-4-4a4 4 0 0 0-4 4a4 4 0 0 0 4 4'/%3E%3C/svg%3E");
+    width: 24px;
+    height: 24px;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z'/%3E%3C/svg%3E");
     background-color: #222;
     -webkit-mask-image: var(--svg);
     mask-image: var(--svg);
@@ -1889,7 +1889,9 @@ div {
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
-  }
+}
+
+  
   .alert.alert-danger {
     margin-top: 10px;
     background-color: #f8d7da;
@@ -2029,4 +2031,9 @@ iframe.map {
 .our-team .btn-primary:hover{
     background-color: #242424;
 }
-
+.register-link{
+    background-color: #fff !important;
+    color: #000 !important;
+    text-decoration: none !important;
+    border-style: none !important;
+}

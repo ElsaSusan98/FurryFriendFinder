@@ -6,9 +6,8 @@ const db = require("./services/db");
 
 const authController = require("./controllers/authController");
 const homeController = require("./controllers/homeController");
-const trainerController = require("./controllers/trainerController"); 
-const appointmentController = require('./controllers/appoinmentController');
-
+const trainerController = require("./controllers/trainerController");
+const appointmentController = require("./controllers/appoinmentController");
 
 const app = express();
 
@@ -45,8 +44,9 @@ app.get("/aboutus", homeController.aboutUs);
 app.get('/finder', trainerController.finder);
 app.get('/trainer/:id', trainerController.details);
 app.post('/book-appointment/:id', appointmentController.bookAppointment);
-
+app.get("/logout",authController.logout);
 app.get("/contact", homeController.contact);
+
 
 app.get("/goodbye", (req, res) => res.send("Goodbye world!"));
 app.get("/hello/:name", (req, res) => res.send("Hello " + req.params.name));

@@ -10,18 +10,29 @@ const authController = {
       const [user] = await db.query(sql, [email, password]);
       if (user) {
         req.session.userId = user.user_id; // Store the user's ID in the session
+        console.log("Logged-in User ID:", req.session.userId); // Log the logged-in user's ID
         req.flash('success', 'Login successful'); // Set success flash message
-        res.redirect("/home"); // Redirect to home page upon successful login
+        return res.redirect("/home"); // Redirect to home page upon successful login
       } else {
         req.flash('error', 'Invalid username or password'); // Set error flash message
-        res.redirect("/login"); // Redirect back to login page with flash message
+        return res.redirect("/login"); // Redirect back to login page with flash message
       }
     } catch (error) {
       console.error(error);
       req.flash('error', 'Internal server error'); // Set error flash message
-      res.redirect("/login"); // Redirect back to login page with flash message
+      return res.redirect("/login"); // Redirect back to login page with flash message
     }
   },
+
+  logout: (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error(err);
+      }
+      res.redirect('/login');
+    });
+  },
+
 
   register: async (req, res) => {
     const { firstname, lastname, useremail, userphone, usertype, password, confirm_password } = req.body;

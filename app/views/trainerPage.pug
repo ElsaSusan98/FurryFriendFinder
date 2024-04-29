@@ -3,6 +3,14 @@ extends layout
 block content
 
     .body-content
+          //- Display error message if flash message exists
+          if flash && flash.error
+              .alert.alert-danger= flash.error
+
+          //- Display success message if flash message exists
+          if flash && flash.success
+              .alert.alert-success= flash.success
+
           section.finder
               .about-section
                   h2 Trainer Details
@@ -36,7 +44,7 @@ block content
                     input#email.form-control(type='email', name='email', required='')
                   .form-group.col
                     label(for='pet-name') Pet Name:
-                    input#pet-name.form-control(type='text', name='pet-name', required='')
+                    input#pet-name.form-control(type='text', name='petName', required='')
                 .form-row 
                   .form-group.col
                     label(for='appointment-date') Appointment Date:
@@ -46,7 +54,7 @@ block content
                     input#appointment-time.form-control(type='time', name='appointmentTime', required='')
                 .form-group
                   label(for='pet-breed') Pet Breed:
-                  input#pet-breed.form-control(type='text', name='pet-breed', required='')
+                  input#pet-breed.form-control(type='text', name='petBreed', required='')
                 .form-group
                   label(for='query') Any Query:
                   textarea#query.form-control(name='query')
