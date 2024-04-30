@@ -5,27 +5,7 @@ block content
         section.home_banner 
             h1 Furry Friend Finder 
             p  Keep Your Pets Happy
-        section.testimonials
-            if trainers && trainers.length > 0
-                h1 Our Trainers
-                .row
-                    each trainer in trainers
-                        .testimonials-col
-                            img(src=trainer.trainer_image)
-                            div
-                                p
-                                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porttitor nisi at arcu tempus,
-                                    | in
-                                    | tincidunt sem maximus. Vivamus hendrerit, felis in condimentum ultricies, elit sem bibendum
-                                    | sapien,
-                                    | sed molestie turpis
-                                    h3 #{trainer.trainer_name}
-                                    p.trainer Trainer Speciality:
-                                        p.trainer_spec #{trainer.trainer_speciality}
-                                    p.experience Trainer Experience: 
-                                        p.trainer_spec #{trainer.trainer_experience}
-            else 
-                No trainers found               
+                      
         section.course
             h1 Services we offer
             p
