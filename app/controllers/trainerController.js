@@ -1,6 +1,7 @@
 
 const db = require("../services/db");
 const Trainer = require('../models/trainers');
+const Appointment = require('../models/appoinment');
 
 const trainerController = {
 
@@ -88,7 +89,20 @@ const trainerController = {
             res.status(500).json({ error: 'Internal server error' });
         }
     },
-
+    appoinments: async (req, res) => {
+        try {
+            // const trainer = await Trainer.findByUserId(req.session.userId);
+            // console.log("trainer",trainer);
+            // const appointments = await Appointment.findAllByTrainerId(trainer.id);
+            res.render('trainerDashboard');
+        } catch (error) {
+            // console.error('Error fetching appointments:', error);
+            // res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+    
+    
+    
 
 };
 

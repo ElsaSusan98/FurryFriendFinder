@@ -20,7 +20,17 @@ const appointmentController = {
             req.flash('error', 'Failed to book appointment');
             res.redirect(`/trainer/${trainerId}`);
         }
-    }
+    },
+    deleteByTrainerId: async (trainerId) => {
+        try {
+          const deleteQuery = "DELETE FROM appointment_table WHERE trainer_id = ?";
+          await db.query(deleteQuery, [trainerId]);
+        } catch (error) {
+          console.error("Error deleting appointments:", error);
+          throw error;
+        }
+      }
+
 };
 
 module.exports = appointmentController;

@@ -86,6 +86,15 @@ const Trainer = {
         throw new Error(`Error deleting trainer profile: ${error.message}`);
       }
     },
+    deleteByTrainerId: async (trainerId) => {
+      try {
+        const sql = "DELETE FROM review WHERE trainer_id = ?";
+        await db.query(sql, [trainerId]);
+      } catch (error) {
+        console.error("Error deleting reviews:", error);
+        throw error;
+      }
+    }
     
 };
 

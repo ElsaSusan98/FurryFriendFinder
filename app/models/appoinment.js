@@ -12,6 +12,25 @@ const Appointment = {
       console.error("Error creating appointment:", error);
       throw error;
     }
+  },
+  findAllByTrainerId: async (trainerId) => {
+    try {
+      const [appointments] = await db.query('SELECT * FROM appointment_table WHERE trainer_id = ?', [trainerId]);
+      return appointments;
+    } catch (error) {
+      console.error('Error finding appointments by trainer id:', error);
+      throw error;
+    }
+  },
+  deleteByTrainerId: async (trainerId) => {
+    try {
+      const deleteQuery = "DELETE FROM appointment_table WHERE trainer_id = ?";
+      await db.query(deleteQuery, [trainerId]);
+      console.log("Appointments deleted successfully for trainer:", trainerId);
+    } catch (error) {
+      console.error("Error deleting appointments:", error);
+      throw error;
+    }
   }
 };
 

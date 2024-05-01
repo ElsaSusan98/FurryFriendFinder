@@ -65,15 +65,20 @@ const authController = {
       // Proceed with registration if all checks pass
       const userInsert = "INSERT INTO user_table (user_firstname, user_lastname, user_email, user_phonenumber, user_type, user_password) VALUES (?, ?, ?, ?, ?, ?)";
       const userValues = [firstname, lastname, useremail, userphone, usertype, password];
-      const [userInsertResult] = await db.query(userInsert, userValues);
+      const userInsertResult = await db.query(userInsert, userValues);
+      const insertedId = userInsertResult.insertId;
+      console.log(userInsertResult,"console");
   
       if (usertype === 'petTrainer') {
-        const { speciality, location, experience, description } = req.body;
-        const trainerInsert = "INSERT INTO trainers (trainer_name, trainer_email, trainer_speciality, trainer_location, trainer_experience, trainer_description, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        const trainerValues = [`${firstname} ${lastname}`, useremail, speciality, location, experience, description, userInsertResult.insertId];
+        const { firstname, lastname, useremail } = req.body;
+        const { speciality = '', image ='',location = '', experience = 1,certificate='', description = '' } = req.body;
+        
+        const trainerInsert = "INSERT INTO trainer_table (trainer_name, trainer_email, trainer_speciality,trainer_image, trainer_location, trainer_experience, trainer_certificate,trainer_description, user_id) VALUES (?, ?, ?, ?,?, ?, ?, ?,?)";
+        
+        const trainerValues = [`${firstname} ${lastname}`, useremail, speciality, image,location, experience,certificate, description, userInsertResult.insertId];
+        
         await db.query(trainerInsert, trainerValues);
-      }
-  
+    }
       req.flash('success', 'Registration successful'); // Set success flash message
       res.redirect("/home"); // Redirect to login page upon successful registration
     } catch (error) {
@@ -116,13 +121,22 @@ const authController = {
   deleteProfile: async (req, res) => {
     try {
       const userId = req.session.userId;
-      
+
+      // Delete the associated appointments
+      await Appointment.deleteByTrainerId(userId);
+
       // Delete the trainer profile
       await Trainer.deleteByUserId(userId);
 
       // Delete the user
-      const deleteUserQuery = "DELETE FROM user_table WHERE user_id = ?";
-      await db.query(deleteUserQuery, [userId]);
+      const deleteQuery = `
+      DELETE a, b
+      FROM trainer_table a
+      INNER JOIN appointment_table b ON a.trainer_id = b.trainer_id
+      WHERE a.user_id = ?;
+    `;
+
+    await db.query(deleteQuery, [userId]);     
 
       // Destroy the session
       req.session.destroy((err) => {
@@ -136,6 +150,7 @@ const authController = {
       res.status(500).json({ error: 'Internal server error' });
     }
   }
+  
 
 };
 

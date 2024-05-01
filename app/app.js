@@ -8,6 +8,7 @@ const authController = require("./controllers/authController");
 const homeController = require("./controllers/homeController");
 const trainerController = require("./controllers/trainerController");
 const appointmentController = require("./controllers/appoinmentController");
+const contactController = require("./controllers/contactController");
 
 const app = express();
 
@@ -55,10 +56,12 @@ app.get('/trainer/:id', trainerController.details);
 app.post('/book-appointment/:id', appointmentController.bookAppointment);
 app.get("/logout",authController.logout);
 app.get("/contact", homeController.contact);
+app.get("/trainer-dashboard",trainerController.appoinments);
 app.get("/trainer-profile/",trainerController.trainerprofile); // Updated route for fetching trainer profile
 app.get('/trainer-profile-edit/:id', trainerController.editProfile);
 app.post('/update-profile/:id', authController.updateProfile);
 app.post('/delete-profile', authController.deleteProfile);
+app.post("/contact", contactController.submitContactForm);
 
 app.get("/goodbye", (req, res) => res.send("Goodbye world!"));
 app.get("/hello/:name", (req, res) => res.send("Hello " + req.params.name));

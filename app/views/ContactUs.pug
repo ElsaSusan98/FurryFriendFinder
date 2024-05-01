@@ -1,5 +1,6 @@
 extends layout
 block content
+    
     .body-content 
         section.about
             section.aboutus
@@ -13,10 +14,15 @@ block content
             .row
               .contactus-form
                   h4 GET IN TOUCH
-                  form(action="", method="post")
+                  form(action="/contact", method="post")
                       input(type="text", id="name", name="name", required="", placeholder="Name")
                       input(type="email", id="email", name="email", required="", placeholder="Email")
+                      input(type="tel", id="phone", name="phone", required="", placeholder="Phone Number")
                       input(type="text", id="subject", name="subject", required="", placeholder="Subject")
                       textarea(id="message", name="message", rows="4", required="", placeholder="Your Message")
                       button.submit-button-style(type="submit") SEND MESSAGE
         
+    if locals.success
+        .alert.alert-success= locals.success
+    if locals.error
+        .alert.alert-danger= locals.error
