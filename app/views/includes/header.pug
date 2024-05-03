@@ -6,7 +6,7 @@ header.myHeader#myHeader
         .nav-links#navLinks
             i.fa.fa-times(onclick="hideMenu()")
 
-            if (!session)
+            if !session
                 ul.list-item
                     li
                         a(href="/home") HOME
@@ -18,31 +18,6 @@ header.myHeader#myHeader
                         a(href="/blog") BLOG
                     li 
                         a(href="/contact") CONTACT US
-            else if session.userType === 'petOwner'
-                ul.list-item
-                    li
-                        a(href="/home") HOME
-                    li
-                        a(href="/aboutUs") ABOUT US
-                    li
-                        a(href="/finder") FINDER
-                    li
-                        a(href="/blog") BLOG
-                    li 
-                        a(href="/contact") CONTACT US
-                    
-            else if session.userType === 'petTrainer'
-                ul.list-item
-                    li
-                        a(href="/home") HOME
-                    li
-                        a(href="/aboutUs") ABOUT US
-                    li 
-                        a(href="/contact") CONTACT US
-                    li
-                        a(href="/trainer-dashboard") TRAINER DASHBOARD
-                    li
-                        a(href="/trainer-profile") PROFILE
             else
                 ul.list-item
                     li
@@ -55,6 +30,13 @@ header.myHeader#myHeader
                         a(href="/blog") BLOG
                     li 
                         a(href="/contact") CONTACT US
+
+                    if session.userType === 'petTrainer'
+                        li
+                            a(href="/trainer-dashboard") TRAINER DASHBOARD
+                        li
+                            a(href="/trainer-profile") PROFILE
+
             i.fa.fa-bars(onclick="showMenu()")
         .fav-icons
             ul

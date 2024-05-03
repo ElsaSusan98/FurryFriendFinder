@@ -23,16 +23,14 @@ app.use(express.static("public"));
 app.use(
   session({
     secret: 'secret',
-    resave: false,
-    saveUninitialized: true,
+    resave: true,
+    saveUninitialized: false,
+    cookie: { maxAge: 60000 } // Adjust the session expiration time as needed
   })
 );
 
-
 app.use((req, res, next) => {
-  res.locals.userId = req.session.userId;
-  res.locals.userType = req.session.userType;
-  res.locals.trainer = req.session.trainer;
+  res.locals.session = req.session;
   next();
 });
 // Set up connect-flash middleware
@@ -54,14 +52,24 @@ app.get("/aboutus", homeController.aboutUs);
 app.get('/finder', trainerController.finder);
 app.get('/trainer/:id', trainerController.details);
 app.post('/book-appointment/:id', appointmentController.bookAppointment);
-app.get("/logout",authController.logout);
+app.get("/logout", authController.logout);
 app.get("/contact", homeController.contact);
-app.get("/trainer-dashboard",trainerController.appoinments);
-app.get("/trainer-profile/",trainerController.trainerprofile); // Updated route for fetching trainer profile
+app.get("/trainer-dashboard", trainerController.appoinments);
+app.get("/trainer-profile/", trainerController.trainerprofile);
 app.get('/trainer-profile-edit/:id', trainerController.editProfile);
 app.post('/update-profile/:id', authController.updateProfile);
 app.post('/delete-profile', authController.deleteProfile);
-app.post("/contact", contactController.submitContactForm);
+app.post("/contact", async (req, res) => {
+  try {
+    const result = await contactController.submitContactForm(req.body);
+    res.render("ContactUs", { success: result.success, error: result.error });
+  } catch (error) {
+    console.error(error);
+    res.render("ContactUs", { error: 'Internal server error' });
+  }
+});
+
+
 
 app.get("/goodbye", (req, res) => res.send("Goodbye world!"));
 app.get("/hello/:name", (req, res) => res.send("Hello " + req.params.name));
